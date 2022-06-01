@@ -1,2 +1,41 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+-- To add new Azure users to SQL database from Azure AD:
+
+CREATE USER [email@yourdomain.com] FROM EXTERNAL PROVIDER;
+
+-- To add the reader role to someone in the database:
+
+EXEC sp_addrolemember db_datareader, 'email@yourdomain.com'
+GO
+
+-- Replace db_datareader with any of the roles below to give different permissions on that database.
+-- db_datareader, db_datawriter, db_ddladmin, db_adminaccess, db_owner, db_executor (custom role)
+
+-- To see who has what roles:
+
+SELECT DP1.name AS DatabaseRoleName,   
+   isnull (DP2.name, 'No members') AS DatabaseUserName   
+ FROM sys.database_role_members AS DRM  
+ RIGHT OUTER JOIN sys.database_principals AS DP1  
+   ON DRM.role_principal_id = DP1.principal_id  
+ LEFT OUTER JOIN sys.database_principals AS DP2  
+   ON DRM.member_principal_id = DP2.principal_id  
+WHERE DP1.type = 'R'
+ORDER BY DP1.name;  
+
+
+-- remove user from role
+exec sp_droprolemember db_owner, 'email@yourdomain.com'
+GO
+
+
+
+-- Custom made role to execute stored proceedures
+
+-- Create a db_executor role
+CREATE ROLE db_executor
+
+-- Grant execute rights to the new role
+GRANT EXECUTE TO db_executor
