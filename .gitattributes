@@ -27,7 +27,12 @@ ORDER BY DP1.name;
 
 
 -- remove user from role
-exec sp_droprolemember db_owner, 'email@yourdomain.com'
+exec sp_droprolemember db_owner, 'richard.mcdaniel@homeinsteadinc.com'
+GO
+
+-- DROP USER FROM DB
+
+DROP USER [pawan.karakala@homeinsteadinc.com]
 GO
 
 
