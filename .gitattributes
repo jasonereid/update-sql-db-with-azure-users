@@ -32,7 +32,7 @@ GO
 
 -- DROP USER FROM DB
 
-DROP USER [pawan.karakala@homeinsteadinc.com]
+DROP USER [email@yourdomain.com]
 GO
 
 
