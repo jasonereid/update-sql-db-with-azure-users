@@ -27,7 +27,7 @@ ORDER BY DP1.name;
 
 
 -- remove user from role
-exec sp_droprolemember db_owner, 'richard.mcdaniel@homeinsteadinc.com'
+exec sp_droprolemember db_owner, 'email@yourdomain.com'
 GO
 
 -- DROP USER FROM DB
@@ -44,3 +44,14 @@ CREATE ROLE db_executor
 
 -- Grant execute rights to the new role
 GRANT EXECUTE TO db_executor
+
+--To change local user password:
+
+ALTER LOGIN usernamehere
+WITH PASSWORD = newpass1
+
+
+-- To view database logs
+SELECT * FROM sys.event_log
+WHERE start_time >= '2022-06-22 12:00:00'
+  AND end_time <= '2022-06-23 12:00:00';
